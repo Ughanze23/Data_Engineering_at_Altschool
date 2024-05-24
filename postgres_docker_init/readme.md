@@ -37,11 +37,11 @@ This project is a simple infrastructure setup of a postgres database using docke
     python main.py
     ```
 ## Features
-requirements.txt
-docker-compose.yml setup postgres database
-init.sql : setup script to create schema, table and insert records
-db_setup.py : connect to postgres db
-main.py : query postgres db
+* requirements.txt
+* docker-compose.yml setup postgres database
+* init.sql : setup script to create schema, table and insert records
+* db_setup.py : connect to postgres db
+* main.py : query postgres db
 
 ## Reference
 the table inserted into the database was obtained from google bigquery public data set.
