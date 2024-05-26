@@ -3,3 +3,4 @@ pg_data_new
 pg_data2
 .env
 __pycache__
+gc
