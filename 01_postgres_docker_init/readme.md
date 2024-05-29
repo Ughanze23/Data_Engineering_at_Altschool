@@ -25,7 +25,7 @@ This project is a simple infrastructure setup of a postgres database using docke
     ```
 
 4. **Set up environment variables:**
-    Create a `.env` file in the root directory and add the necessary environment variables as per the `.env` file.
+    Create a `.env` file in the root directory and add the necessary environment variables as per the `.env` file. follow the env-template file as a guide
 
 5. **Run the docker file:**
    run "docker-compose up" to startup the postgres database
