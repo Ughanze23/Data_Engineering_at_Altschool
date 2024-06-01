@@ -1,4 +1,4 @@
-#Postgres setup with docker and psycopg2
+# Postgres setup with docker and psycopg2
 
 
 ## Description
