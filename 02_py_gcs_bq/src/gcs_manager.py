@@ -2,7 +2,7 @@ from google.cloud import storage
 import logging
 from io import StringIO
 
-logging.basicConfig(level=logging.DEBUG, format="%(asctime)s %(levelname)s %(message)s")
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
 
 class GcsManager:
