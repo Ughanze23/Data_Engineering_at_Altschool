@@ -61,7 +61,7 @@ class GcsManager:
         storage_class: Storage class of bucket in GC (defaults to STANDARD)
         """
         try:
-            bucket = self.client.create_bucket(bucket_name)
+            bucket = self.client.create_bucket(bucket_name,location=location,storage_class=storage_class)
             logging.info(f"Bucket {bucket.name} created. gs://{bucket.name}")
 
         except Exception as e:
