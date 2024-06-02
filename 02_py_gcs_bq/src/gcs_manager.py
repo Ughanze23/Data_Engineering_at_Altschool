@@ -1,7 +1,4 @@
-import logging.config
 from google.cloud import storage
-import os
-from dotenv import load_dotenv
 import logging
 from io import StringIO
 
@@ -24,6 +21,7 @@ class GcsManager:
         """
         try:
             gcs_client = storage.Client(project=self.project_id)
+            logging.info(f"Successfully connected to GCS resource on project: {self.project_id}")
             return gcs_client
 
         except Exception as e:
