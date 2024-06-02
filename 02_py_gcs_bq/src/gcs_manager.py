@@ -26,6 +26,7 @@ class GcsManager:
 
         except Exception as e:
             logging.error(f"Error connecting to GCS: {e}")
+            raise e
 
     def get_all_buckets(self) -> list:
         """Fetches and returns a list of bucket names from Google Cloud Storage.
@@ -80,6 +81,7 @@ class GcsManager:
 
         except Exception as e:
             logging.error(f"Could not delete bucket: {e}")
+            raise e
 
     def get_all_bucket_files(self, bucket_name: str) -> list:
         """return all blobs in a bucket.
@@ -117,6 +119,7 @@ class GcsManager:
             )
         except Exception as e:
             logging.error(f"Could not upload file to bucket: {e}")
+            raise e
 
     def upload_file_from_filestream(
         self,
@@ -150,6 +153,7 @@ class GcsManager:
             )
         except Exception as e:
             logging.error(f"Could not upload file to bucket: {e}")
+            raise e
 
     def download_file(
         self, bucket_name: str, source_blob_name: str, destination_file_name: str
@@ -171,6 +175,7 @@ class GcsManager:
             )
         except Exception as e:
             logging.error(f"Could not download blob: {e}")
+            raise e
 
     def delete_file(self, bucket_name: str, blob_name: str) -> None:
         """Delete blob from a bucket.
@@ -187,3 +192,4 @@ class GcsManager:
 
         except Exception as e:
             logging.error(f"Could not delete blob: {e}")
+            raise e
