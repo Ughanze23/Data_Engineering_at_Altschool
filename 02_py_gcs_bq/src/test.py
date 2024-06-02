@@ -8,9 +8,9 @@ load_dotenv()
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("SERVICE_ACCOUNT_AUTH_FILE")
 
-client = GcsManager(project_id=c.PROJECT_ID)
+gcs_client = GcsManager(project_id=c.PROJECT_ID)
 
-client.upload_file(
+gcs_client.upload_file(
     bucket_name="etl_basics_staging",
     file_path="/workspaces/AltschoolfinalsemesterPortfolio/02_py_gcs_bq/data/usa_names.csv",
     destination_blob_name="usa_names.csv",
@@ -18,7 +18,7 @@ client.upload_file(
 
 json_data = get_request(url=c.URL)
 
-client.upload_file_from_filestream(
+gcs_client.upload_file_from_filestream(
     bucket_name="etl_basics_staging", destination_blob_name="games.json", file_obj=json_data
 )
 
