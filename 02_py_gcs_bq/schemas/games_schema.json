@@ -1,0 +1,13 @@
+[
+    { "name": "id", "type": "INTEGER" },
+    { "name": "name", "type": "STRING" },
+    { "name": "genre", "type": "STRING", "mode": "REPEATED" },
+    { "name": "developers", "type": "STRING", "mode": "REPEATED" },
+    { "name": "publishers", "type": "STRING", "mode": "REPEATED" },
+    { "name": "releaseDates", "type": "RECORD", "fields": [
+        { "name": "region", "type": "STRING" },
+        { "name": "date", "type": "STRING" }
+      ]
+    }
+  ]
+  

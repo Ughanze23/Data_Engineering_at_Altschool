@@ -5,3 +5,4 @@ pg_data2
 __pycache__
 gc
 gcs.py
+test.py
