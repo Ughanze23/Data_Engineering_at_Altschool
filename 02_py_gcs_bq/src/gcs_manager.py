@@ -111,6 +111,8 @@ class GcsManager:
         bucket_name: The name of the GCS bucket
         file_path: File location in local system
         destination_blob_name: The name the file will be called in GCS bucket
+
+        Returns : GCS file URI
         """
         try:
             bucket = self.client.bucket(bucket_name)
@@ -119,9 +121,13 @@ class GcsManager:
             logging.info(
                 f"{destination_blob_name} uploaded successfully into bucket - {bucket_name}"
             )
+            return f"gs://{bucket}/{destination_blob_name}"
         except Exception as e:
             logging.error(f"Could not upload file to bucket: {e}")
             raise e
+
+        
+
 
     def upload_file_from_filestream(
         self,
@@ -139,6 +145,8 @@ class GcsManager:
         destination_blob_name: The name of the file in gcs.
         content_type: the type of file defaults to 'application/json'
         encoding: The encoding of the string data (defaults to 'utf-8').
+
+         Returns : GCS file URI
         """
         try:
             # Create an in-memory StringIO object from the string data
@@ -153,6 +161,7 @@ class GcsManager:
             logging.info(
                 f"{destination_blob_name} uploaded successfully into bucket - {bucket_name}"
             )
+            return f"gs://{bucket}/{destination_blob_name}"
         except Exception as e:
             logging.error(f"Could not upload file to bucket: {e}")
             raise e
