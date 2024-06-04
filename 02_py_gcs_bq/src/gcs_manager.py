@@ -2,6 +2,7 @@ from google.cloud import storage
 from google.cloud import exceptions
 import logging
 from io import StringIO
+from os import PathLike
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
@@ -102,7 +103,7 @@ class GcsManager:
             logging.error(f"Could not return blobs in bucket: {e}")
 
     def upload_file(
-        self, bucket_name: str, file_path: str, destination_blob_name: str
+        self, bucket_name: str, file_path: PathLike, destination_blob_name: str
     ) -> None:
         """Uploads a blob to the bucket.
 
@@ -157,7 +158,7 @@ class GcsManager:
             raise e
 
     def download_file(
-        self, bucket_name: str, source_blob_name: str, destination_file_name: str
+        self, bucket_name: str, source_blob_name: str, destination_file_name: PathLike
     ) -> None:
         """Downloads a blob from the bucket.
 
