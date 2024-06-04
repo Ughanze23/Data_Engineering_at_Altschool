@@ -1,4 +1,5 @@
 from google.cloud import storage
+from google.cloud import exceptions
 import logging
 from io import StringIO
 
