@@ -4,9 +4,10 @@ import json
 
 # {"X-auth-key": "Basic qwertyui12345fdghjkl;", "format": "Application/Python"}
 
+
 # GET / POST / PUT / DELETE
 class BaseAPI:
-    def __init__(self, base_url:str, headers:dict=None) -> None:
+    def __init__(self, base_url: str, headers: dict = None) -> None:
         self.base_url = base_url
         self.headers = headers or {}
 
@@ -23,7 +24,7 @@ class BaseAPI:
             print(f"HTTP error occurred: {http_err}")
         except Exception as err:
             print(f"An error occurred: {err}")
-    
+
     def post(self, endpoint, data=None, json=None):
         """Send a POST request."""
         url = f"{self.base_url}{endpoint}"
@@ -60,14 +61,15 @@ class BaseAPI:
         except Exception as err:
             print(f"An error occurred: {err}")
 
+
 class BankAPI(BaseAPI):
     def __init__(self, base_url, headers=None):
         super().__init__(base_url, headers)
-    
+
     def get_transactions(self):
         endpoint = "/accounts"
         return self.get(endpoint)
-    
+
     @staticmethod
     def _to_jsonl_buffer(json_data):
-        return '\n'.join([json.dumps(record) for record in json_data])
+        return "\n".join([json.dumps(record) for record in json_data])

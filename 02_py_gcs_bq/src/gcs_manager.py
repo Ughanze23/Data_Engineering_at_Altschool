@@ -23,7 +23,9 @@ class GcsManager:
         """
         try:
             gcs_client = storage.Client(project=self.project_id)
-            logging.info(f"Successfully connected to GCS resource on project: {self.project_id}")
+            logging.info(
+                f"Successfully connected to GCS resource on project: {self.project_id}"
+            )
             return gcs_client
 
         except Exception as e:
@@ -64,7 +66,9 @@ class GcsManager:
         storage_class: Storage class of bucket in GC (defaults to STANDARD)
         """
         try:
-            bucket = self.client.create_bucket(bucket_name,location=location,storage_class=storage_class)
+            bucket = self.client.create_bucket(
+                bucket_name, location=location, storage_class=storage_class
+            )
             logging.info(f"Bucket {bucket.name} created. gs://{bucket.name}")
 
         except Exception as e:
@@ -126,9 +130,6 @@ class GcsManager:
             logging.error(f"Could not upload file to bucket: {e}")
             raise e
 
-        
-
-
     def upload_file_from_filestream(
         self,
         bucket_name: str,
@@ -161,7 +162,7 @@ class GcsManager:
             logging.info(
                 f"{destination_blob_name} uploaded successfully into bucket - {bucket_name}"
             )
-            return f"gs://{bucket}/{destination_blob_name}"
+            return f"gs://{bucket_name}/{destination_blob_name}"
         except Exception as e:
             logging.error(f"Could not upload file to bucket: {e}")
             raise e

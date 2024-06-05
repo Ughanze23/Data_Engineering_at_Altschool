@@ -19,6 +19,7 @@ gcs_client.upload_file(
 )
 
 json_data = get_request(url=c.URL)
+json_data = get_request(url=f"{c.BASE_URL}/{c.TARGET_ENDPOINT}")
 
 gcs_client.upload_file_from_filestream(
     bucket_name="etl_basics_staging", destination_blob_name="games.json", file_obj=json_data
@@ -35,3 +36,9 @@ bq_client = BqManager(project_id=c.PROJECT_ID)
 bq_client.create_dataset(dataset_id="etl_basics_staging")
 
 #infer table schema from incoming data
+
+
+#flow
+#extract data from api => create  bucket => load data into bucket => create dataset => create table => load gcs data into data.
+
+#add exceptions for when bucket does not exist. file does not exist, data set does not exist and table does not exist
