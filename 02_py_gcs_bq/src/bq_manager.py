@@ -116,7 +116,7 @@ class BqManager:
         schema,
         create_disposition="CREATE_IF_NEEDED",
         write_disposition="WRITE_TRUNCATE",
-    ):
+    ) -> bigquery.LoadJobConfig:
         # write_disposition='WRITE_TRUNCATE',WRITE_APPEND
         config_dict = {
             "json": bigquery.LoadJobConfig(
