@@ -7,5 +7,7 @@ GCS_FILE_NAME = ["usa_name.csv","games.json"]  # destination blob name in GCS
 DESTINATION_FILE_NAME = ""  # downloaded file from gcs file path
 BASE_URL = "https://api.sampleapis.com/playstation"  # URL provided to get request api script
 TARGET_ENDPOINT = "games"  # goes with the baseURL
-SCHEMA_FILE_PATH = ["02_py_gcs_bq/schemas/usa_names_schema.json",
-                    "02_py_gcs_bq/schemas/games_schema.json"]  # file path of bigquery table json schema
+SCHEMA_FILE_PATH = ["/workspaces/AltschoolfinalsemesterPortfolio/02_py_gcs_bq/schemas/usa_names_schema.json",
+                    "/workspaces/AltschoolfinalsemesterPortfolio/02_py_gcs_bq/schemas/games_schema.json"]  # file path of bigquery table json schema
+
+BQ_FILE_UPLOAD_PATH="/workspaces/AltschoolfinalsemesterPortfolio/02_py_gcs_bq/data/usa_names.csv"
