@@ -66,13 +66,20 @@ class GcsManager:
         storage_class: Storage class of bucket in GC (defaults to STANDARD)
         """
         try:
-            bucket = self.client.create_bucket(
-                bucket_name, location=location, storage_class=storage_class
+            bucket = storage.Bucket(self.client, name=bucket_name)
+            # Set the storage class
+            bucket.storage_class = (
+                storage_class  # Or other classes like "NEARLINE", "COLDLINE", "ARCHIVE"
             )
-            logging.info(f"Bucket {bucket.name} created. gs://{bucket.name}")
+            bucket = self.client.create_bucket(bucket_name, location=location)
+            logging.info(f"Bucket: {bucket_name} created. gs://{bucket.name}")
+
+        except exceptions.Conflict:
+            logging.info(f"Bucket with name: {bucket_name} already exists.")
 
         except Exception as e:
             logging.error(f"Could not create bucket: {e}")
+            raise e
 
     def delete_bucket(self, bucket_name: str) -> None:
         """delete a gcs bucket.
@@ -83,7 +90,10 @@ class GcsManager:
         try:
             bucket = self.client.get_bucket(bucket_name)
             bucket.delete()
-            logging.info(f"Bucket {bucket.name} deleted")
+            logging.info(f"Bucket {bucket_name} deleted")
+
+        except exceptions.NotFound:
+            logging.info(f"Bucket: {bucket_name} does not exist.")
 
         except Exception as e:
             logging.error(f"Could not delete bucket: {e}")
@@ -121,11 +131,16 @@ class GcsManager:
         try:
             bucket = self.client.bucket(bucket_name)
             blob = bucket.blob(destination_blob_name)
-            blob.upload_from_filename(filename=file_path)
-            logging.info(
-                f"{destination_blob_name} uploaded successfully into bucket - {bucket_name}"
-            )
-            return f"gs://{bucket}/{destination_blob_name}"
+            if blob.exists():
+                logging.info(f"blob with name: {destination_blob_name} already exists.")
+                return f"gs://{bucket_name}/{destination_blob_name}"
+            else:
+                blob.upload_from_filename(filename=file_path)
+                logging.info(
+                    f"{destination_blob_name} uploaded successfully into bucket - {bucket_name}"
+                )
+                return f"gs://{bucket_name}/{destination_blob_name}"
+
         except Exception as e:
             logging.error(f"Could not upload file to bucket: {e}")
             raise e
@@ -158,11 +173,18 @@ class GcsManager:
 
             bucket = self.client.bucket(bucket_name)
             blob = bucket.blob(destination_blob_name)
-            blob.upload_from_string(data=data_bytes, content_type=content_type)
-            logging.info(
-                f"{destination_blob_name} uploaded successfully into bucket - {bucket_name}"
-            )
-            return f"gs://{bucket_name}/{destination_blob_name}"
+            if blob.exists():
+                logging.info(
+                    f"File {destination_blob_name} already exists in {bucket_name}."
+                )
+                return f"gs://{bucket_name}/{destination_blob_name}"
+            else:
+                blob.upload_from_string(data=data_bytes, content_type=content_type)
+                logging.info(
+                    f"{destination_blob_name} uploaded successfully into bucket - {bucket_name}"
+                )
+                return f"gs://{bucket_name}/{destination_blob_name}"
+
         except Exception as e:
             logging.error(f"Could not upload file to bucket: {e}")
             raise e
@@ -185,6 +207,10 @@ class GcsManager:
             logging.info(
                 f"Downloaded storage object {source_blob_name} from bucket {bucket_name} to local file {destination_file_name}."
             )
+        except exceptions.NotFound:
+            logging.info(
+                f"Could not find blob: {source_blob_name} in gcs bucket: {bucket_name}"
+            )
         except Exception as e:
             logging.error(f"Could not download blob: {e}")
             raise e
@@ -201,6 +227,11 @@ class GcsManager:
             blob = bucket.blob(blob_name)
             blob.delete()
             logging.info(f"Blob {blob_name} deleted")
+
+        except exceptions.NotFound:
+            logging.info(
+                f"Could not find blob: {blob_name} in gcs bucket: {bucket_name}"
+            )
 
         except Exception as e:
             logging.error(f"Could not delete blob: {e}")
