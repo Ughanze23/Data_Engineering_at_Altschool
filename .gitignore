@@ -4,6 +4,8 @@ pg_data2
 .env
 __pycache__
 gc
+
 gcs.py
 test.py
 /workspaces/AltschoolfinalsemesterPortfolio/02_py_gcs_bq/src/test.py
+
