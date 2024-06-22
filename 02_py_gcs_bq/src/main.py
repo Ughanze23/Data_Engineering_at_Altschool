@@ -25,19 +25,19 @@ if __name__ == "__main__":
 
     # create tables
     bq_client.create_table(
-        schema_file_path=c.SCHEMA_FILE_PATH[0],
+        schema_file_path=c.table_configs.get("usa_names").get("SCHEMA_FILE_PATH"),
         dataset_id=c.DATA_SET_NAME,
-        table_id=c.TABLE_NAME[0],
+        table_id=c.table_configs.get("usa_names").get("TABLE_NAME"),
     )
     bq_client.create_table(
-        schema_file_path=c.SCHEMA_FILE_PATH[1],
+        schema_file_path=c.table_configs.get("games").get("SCHEMA_FILE_PATH"),
         dataset_id=c.DATA_SET_NAME,
-        table_id=c.TABLE_NAME[1],
+        table_id=c.table_configs.get("games").get("TABLE_NAME"),
     )
 
     # load csv data from system into bigquery table
     # fetch table schema
-    with open(c.SCHEMA_FILE_PATH[0]) as schema_file:
+    with open(c.table_configs.get("usa_names").get("SCHEMA_FILE_PATH")) as schema_file:
         schema = json.load(schema_file)
 
     # fetch bigquery job config
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     # read file as bytes
     with open(c.BQ_FILE_UPLOAD_PATH, "rb") as file:
         # upload data to biquery
-        table = f"{c.DATA_SET_NAME}.{c.TABLE_NAME[0]}"  # table name
+        table = f'{c.DATA_SET_NAME}.{c.table_configs.get("usa_names").get("TABLE_NAME")}'  # table name
         bq_client.upload_data_to_table_from_file(
             file_obj=file, destination_table=table, job_config=job_config
         )
@@ -59,19 +59,19 @@ if __name__ == "__main__":
     gcs_uri = gcs_client.upload_file_from_filestream(
         file_obj=gcs_data,
         bucket_name=c.BUCKECT_NAME,
-        destination_blob_name=c.GCS_FILE_NAME[1],
+        destination_blob_name=c.table_configs.get("games").get("GCS_FILE_NAME"),
     )
 
     # load data from gcs into bigquery
     # fetch table schema
-    with open(c.SCHEMA_FILE_PATH[1]) as schema_file:
+    with open(c.table_configs.get("games").get("SCHEMA_FILE_PATH")) as schema_file:
         schema = json.load(schema_file)
 
     # fetch bigquery job config
     job_config = bq_client.fetch_job_config(file_format="json", schema=schema)
 
     # load data into bigquery
-    table = f"{c.DATA_SET_NAME}.{c.TABLE_NAME[1]}"  # table name
+    table = f'{c.DATA_SET_NAME}.{c.table_configs.get("games").get("TABLE_NAME")}'  # table name
     bq_client.upload_data_to_table_from_uri(
         gcs_uri=gcs_uri, destination_table=table, job_config=job_config
     )

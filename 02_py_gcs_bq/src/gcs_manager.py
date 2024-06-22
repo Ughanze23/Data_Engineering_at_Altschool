@@ -1,7 +1,7 @@
 from google.cloud import storage
 from google.cloud import exceptions
 import logging
-from io import StringIO
+from io import StringIO, BytesIO
 from os import PathLike
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -152,7 +152,7 @@ class GcsManager:
         destination_blob_name: str,
         content_type="application/json",
         encoding: str = "utf-8",
-    ) -> None:
+    ) -> str:
         """Uploads a blob to a bucket using stringIO.
 
         Args:
@@ -214,6 +214,30 @@ class GcsManager:
         except Exception as e:
             logging.error(f"Could not download blob: {e}")
             raise e
+
+    def download_file_to_stream(self, bucket_name: str, source_blob_name: str):
+        """Downloads a blob to a stream or other file-like object
+        Args:
+        bucket_name: The name of the GCS bucket
+
+        Returns
+        BytesIO: An in-memory bytes buffer with the blob's content.
+        """
+        try:
+            # Initialize an in-memory bytes buffer
+            file_obj = BytesIO()
+            bucket = self.client.bucket(bucket_name)
+            blob = bucket.blob(source_blob_name)
+            blob.download_to_file(file_obj)
+            # Seek to the beginning of the stream
+            file_obj.seek(0)
+
+            logging.info(f"Downloaded blob {source_blob_name} to file-like object.")
+            return file_obj
+
+        except exceptions as e:
+            logging.error(f"Error downloading blob:{source_blob_name} - {e}")
+            return None
 
     def delete_file(self, bucket_name: str, blob_name: str) -> None:
         """Delete blob from a bucket.
