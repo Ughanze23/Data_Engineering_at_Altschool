@@ -4,4 +4,7 @@ pg_data2
 .env
 __pycache__
 gc
+
 gcs.py
+
+

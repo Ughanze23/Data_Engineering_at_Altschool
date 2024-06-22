@@ -39,11 +39,11 @@ def query_db(connection, query_str):
     cursor = conn.cursor()
 
     # execute query
-    try :
+    try:
         cursor.execute(query_str)
     except Error as e:
         print(f"Error: {e}")
-    
+
     # Fetching and printing the results
     result = cursor.fetchall()
     for row in result:
