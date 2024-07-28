@@ -1,8 +1,0 @@
-[
-    { "name": "state", "type": "STRING","mode" : "NULLABLE" },
-    { "name": "gender", "type": "STRING","mode" : "NULLABLE" },
-    { "name": "year", "type": "INT64","mode" : "NULLABLE" },
-    { "name": "name", "type": "STRING","mode" : "NULLABLE" },
-    { "name": "number", "type": "INT64","mode" : "NULLABLE"}
-  ]
-  
