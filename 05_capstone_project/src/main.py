@@ -15,6 +15,9 @@ if __name__ == "__main__":
     gcs_client = GcsManager(project_id=c.PROJECT_ID)
     bq_client = BqManager(project_id=c.PROJECT_ID)
 
+    # create bucket
+    gcs_client.create_bucket(bucket_name=c.BUCKECT_NAME)
+
     # create tables
     for prefix in c.DATA_SET_PREFIX:
         # create dataset
