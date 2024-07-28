@@ -1,5 +1,5 @@
 DATA_SET_NAME = "ecommerce"  # bigquery dataset name
-DATA_SET_PREFIX = ['staging','ods']
+DATA_SET_PREFIX = ['temp','raw']
 PROJECT_ID = "alt-school-423017"  # GC project id
 TABLE_NAME = ["customers","geolocation",
               "order_items","orders",
