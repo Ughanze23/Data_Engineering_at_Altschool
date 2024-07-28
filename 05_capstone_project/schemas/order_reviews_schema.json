@@ -1,0 +1,38 @@
+[
+    {
+      "name": "review_id",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    },
+    {
+      "name": "order_id",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    },
+    {
+      "name": "review_score",
+      "type": "INTEGER",
+      "mode": "REQUIRED"
+    },
+    {
+      "name": "review_comment_title",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "name": "review_comment_message",
+      "type": "STRING",
+      "mode": "NULLABLE"
+    },
+    {
+      "name": "review_creation_date",
+      "type": "DATE",
+      "mode": "REQUIRED"
+    },
+    {
+      "name": "review_answer_timestamp",
+      "type": "TIMESTAMP",
+      "mode": "REQUIRED"
+    }
+  ]
+  
