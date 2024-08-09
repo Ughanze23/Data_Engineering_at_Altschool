@@ -4,6 +4,7 @@ CREATE SCHEMA IF NOT EXISTS  customers;
 CREATE SCHEMA IF NOT EXISTS  products;
 CREATE SCHEMA IF NOT EXISTS  sellers;
 CREATE SCHEMA IF NOT EXISTS  geo_location;
+CREATE SCHEMA IF NOT EXISTS  staging;
 
 --create orders table
 CREATE TABLE IF NOT EXISTS orders.orders(
@@ -34,10 +35,22 @@ CREATE TABLE IF NOT EXISTS orders.order_reviews(
     review_id VARCHAR(255) NOT NULL ,
     order_id VARCHAR(255) NOT NULL,
     review_score INTEGER NOT NULL,
-    review_comment_title VARCHAR(255) NULL,
-    review_comment_message VARCHAR(255) NULL,
-    review_creation_date DATE NOT NULL,
+    review_comment_title TEXT NULL,
+    review_comment_message TEXT NULL,
+    review_creation_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     review_answer_timestamp TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS staging.products(
+ product_id VARCHAR(255) NOT NULL PRIMARY KEY,
+    product_category_name VARCHAR(255) NULL,
+    product_name_lenght INTEGER NULL,
+    product_description_lenght INTEGER NULL,
+    product_photos_qty INTEGER NULL,
+    product_weight_g FLOAT(53) NULL,
+    product_length_cm FLOAT(53) NULL,
+    product_height_cm FLOAT(53) NULL,
+    product_width_cm FLOAT(53) NULL  
 );
 
 --create order payments table
@@ -63,7 +76,7 @@ CREATE TABLE IF NOT EXISTS customers.customers(
 --create products table
 CREATE TABLE IF NOT EXISTS products.products(
     product_id VARCHAR(255) NOT NULL PRIMARY KEY,
-    product_category_name VARCHAR(255) NULL,
+    category_id VARCHAR(255) NULL,
     product_name_lenght INTEGER NULL,
     product_description_lenght INTEGER NULL,
     product_photos_qty INTEGER NULL,
@@ -75,6 +88,7 @@ CREATE TABLE IF NOT EXISTS products.products(
 
 -- create products category table
 CREATE TABLE IF NOT EXISTS products.product_category(
+    category_id UUID NOT NULL DEFAULT gen_random_uuid(),
     product_category_name VARCHAR(255) NOT NULL,
     product_category_name_english VARCHAR(255) NOT NULL
 );
@@ -137,7 +151,9 @@ COPY orders.order_reviews (review_id,
     review_comment_message,
     review_creation_date,
     review_answer_timestamp)
-FROM '/data/olist_order_reviews_dataset.csv' DELIMITER ',' CSV HEADER;
+FROM '/data/olist_order_reviews_dataset.csv' DELIMITER ',' CSV HEADER ENCODING 'UTF8';
+
+
 
 COPY orders.orders (order_id,
     customer_id,
@@ -148,7 +164,7 @@ COPY orders.orders (order_id,
     order_delivered_customer_date,order_estimated_delivery_date)
 FROM '/data/olist_orders_dataset.csv' DELIMITER ',' CSV HEADER;
 
-COPY products.products (product_id, product_category_name,product_name_lenght,
+COPY staging.products (product_id, product_category_name,product_name_lenght,
     product_description_lenght,
     product_photos_qty,
     product_weight_g,
@@ -160,5 +176,26 @@ FROM '/data/olist_products_dataset.csv' DELIMITER ',' CSV HEADER;
 COPY sellers.sellers (seller_id, seller_zip_code_prefix, seller_city,seller_state)
 FROM '/data/olist_sellers_dataset.csv' DELIMITER ',' CSV HEADER;
 
+
 COPY products.product_category (product_category_name,product_category_name_english)
 FROM '/data/product_category_name_translation.csv' DELIMITER ',' CSV HEADER;
+
+INSERT INTO products.products (product_id, category_id,product_name_lenght,
+    product_description_lenght,
+    product_photos_qty,
+    product_weight_g,
+    product_length_cm,
+    product_height_cm,
+    product_width_cm)
+SELECT  product_id, cat.category_id,product_name_lenght,
+    product_description_lenght,
+    product_photos_qty,
+    product_weight_g,
+    product_length_cm,
+    product_height_cm,
+    product_width_cm
+
+FROM staging.products stp
+LEFT JOIN products.product_category cat ON cat.product_category_name = stp.product_category_name;
+
+DROP TABLE staging.products;
