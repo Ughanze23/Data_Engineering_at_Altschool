@@ -1,4 +1,9 @@
-[
+[    
+    {
+      "name": "category_id",
+      "type": "STRING",
+      "mode": "REQUIRED"
+    },
     {
       "name": "product_category_name",
       "type": "STRING",
