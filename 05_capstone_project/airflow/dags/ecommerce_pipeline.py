@@ -93,7 +93,8 @@ def ecommerce_pipeline():
                     source_format='CSV',
                     write_disposition='WRITE_TRUNCATE',
                     skip_leading_rows=1,
-                    quote_character='"'
+                    quote_character='"',
+                    autodetect=True,
                     )
             else:
                 task =  GCSToBigQueryOperator(
