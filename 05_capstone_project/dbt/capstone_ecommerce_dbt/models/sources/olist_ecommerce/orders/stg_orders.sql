@@ -4,7 +4,7 @@ with source as (
 renamed as (
     select
         {{ adapter.quote("order_id") }},
-        {{ adapter.quote("customer_id") }},
+        {{ adapter.quote("customer_id") }} as customer_order_id,
         {{ adapter.quote("order_status") }},
         {{ adapter.quote("order_purchase_timestamp") }},
         {{ adapter.quote("order_approved_at") }},

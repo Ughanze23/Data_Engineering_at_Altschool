@@ -95,6 +95,7 @@ def ecommerce_pipeline():
                     skip_leading_rows=1,
                     quote_character='"',
                     autodetect=True,
+                    create_disposition='CREATE_NEVER'
                     )
             else:
                 task =  GCSToBigQueryOperator(

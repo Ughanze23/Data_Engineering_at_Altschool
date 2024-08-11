@@ -1,0 +1,6 @@
+version: 2
+
+models:
+  - name: stg_geolocation
+    description : maps 1-1 with source geolocation table 
+  

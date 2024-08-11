@@ -1,0 +1,7 @@
+version: 2
+
+models:
+  - name: stg_products
+    description : maps 1-1 with source products table 
+  - name: stg_product_category
+    description : maps 1-1 with source products category table   

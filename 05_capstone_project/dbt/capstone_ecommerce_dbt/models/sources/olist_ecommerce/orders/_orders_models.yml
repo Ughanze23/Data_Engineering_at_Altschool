@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: maps 1-1 with source orders table 
+  - name: stg_order_items
+    description: maps 1-1 with source order items table 
+  - name: stg_order_payments
+    description:  maps 1-1 with source orders payments table 
+  - name: stg_order_reviews
+    description: maps 1-1 with source order reviews table 

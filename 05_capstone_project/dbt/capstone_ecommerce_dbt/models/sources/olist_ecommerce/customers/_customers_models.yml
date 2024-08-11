@@ -1,0 +1,6 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description : maps 1-1 with source customers table 
+   
