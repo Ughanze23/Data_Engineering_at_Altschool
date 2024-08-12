@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: stg_sellers
+    description: maps 1-1 with source sellers table
+    columns:
+      - name: seller_id
+        desription: seller unique identifier.
+      - name: seller_zip_code
+        desription: first 5 digits of seller zip code.
+      - name: seller_city
+        desription: seller city name.
+      - name: seller_state
+        desription: seller state.

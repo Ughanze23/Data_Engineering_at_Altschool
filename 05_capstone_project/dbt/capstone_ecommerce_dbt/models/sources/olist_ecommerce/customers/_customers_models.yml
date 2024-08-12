@@ -3,4 +3,16 @@ version: 2
 models:
   - name: stg_customers
     description : maps 1-1 with source customers table 
+    columns:
+      - name: customer_order_id
+        description : key to the orders dataset. Each order has a unique customer_id.
+      - name: customer_id
+        description : unique identifier of a customer.
+      - name: customer_zip_code
+        description : first five digits of customer zip code.
+      - name: customer_city
+        description : customer city name.
+      - name: customer_state
+        description : customer state code.
+      
    
