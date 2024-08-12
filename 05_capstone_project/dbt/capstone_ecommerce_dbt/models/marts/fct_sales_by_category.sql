@@ -1,1 +1,1 @@
-select * from {{ref("int_sales_by_category")}}
+SELECT * FROM {{ref("int_sales_by_category")}}
