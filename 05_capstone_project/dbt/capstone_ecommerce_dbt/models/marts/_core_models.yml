@@ -1,0 +1,207 @@
+version: 2
+models:
+  - name: dim_customers
+    description: Contains detailed information about customers, including their
+      demographic data and other attributes. Used to analyze customer behavior
+      and segment customers based on various criteria.
+    columns:
+      - name: customer_order_id
+        data_type: string
+        description: key to the orders dataset. Each order has a unique customer_id.
+      - name: customer_id
+        data_type: string
+        description: unique identifier of a customer.
+      - name: customer_zip_code
+        data_type: int64
+        description: first five digits of customer zip code.
+      - name: customer_city
+        data_type: string
+        description: customer city name.
+      - name: customer_state
+        data_type: string
+        description: customer state code.
+  - name: dim_location
+    description: Stores geographical data, including city, state, region, and postal
+      codes. This dimension is used to perform location-based analysis and track
+      sales and orders across different regions.
+    columns:
+      - name: zip_code
+        data_type: int64
+        description: first 5 digits of zip code.
+      - name: lat
+        data_type: float64
+        description: latitude.
+      - name: lng
+        data_type: float64
+        description: longitude.
+      - name: city
+        data_type: string
+        description: city name.
+      - name: state
+        data_type: string
+        description: state code.
+  - name: dim_orders
+    description: Holds the master data for orders, capturing essential details such
+      as order dates, statuses, and associated customers. It serves as a primary
+      reference for all order-related metrics.
+    columns:
+      - name: order_id
+        data_type: string
+        description: unique identifier of an order.
+      - name: customer_order_id
+        data_type: string
+        description: key to the customer dataset. Each order has a unique customer_id.
+      - name: order_status
+        data_type: string
+        description: Reference to the order status (delivered, shipped, etc).
+      - name: order_purchase_timestamp
+        data_type: timestamp
+        description: Shows the purchase timestamp.
+      - name: order_approved_at
+        data_type: timestamp
+        description: Shows the payment approval timestamp.
+      - name: order_delivered_carrier_date
+        data_type: timestamp
+        description: Shows the order posting timestamp. When it was handled to the logistic partner.
+      - name: order_delivered_customer_date
+        data_type: timestamp
+        description: Shows the actual order delivery date to the customer.
+      - name: order_estimated_delivery_date
+        data_type: timestamp
+        description: Shows the estimated delivery date that was informed to customer at the purchase moment.
+  - name: dim_products
+    description: Contains product-related information, including product names,
+      categories, and attributes. Used for analyzing sales and performance of
+      different products.
+    columns:
+      - name: product_id
+        data_type: string
+        description: unique product identifier.
+      - name: category_id
+        data_type: string
+        description: unique product category identifier.
+      - name: product_category
+        data_type: string
+        description: category name in English.
+      - name: product_name_length
+        data_type: int64
+        description: number of characters extracted from the product name.
+      - name: product_description_length
+        data_type: int64
+        description: number of characters extracted from the product description.
+      - name: product_photos_qty
+        data_type: int64
+        description: number of product published photos.
+      - name: product_weight_g
+        data_type: float64
+        description: product weight measured in grams.
+      - name: product_length_cm
+        data_type: float64
+        description: product length measured in centimeters.
+      - name: product_height_cm
+        data_type: float64
+        description: product height measured in centimeters.
+      - name: product_width_cm
+        data_type: float64
+        description: product width measured in centimeters.
+  - name: dim_sellers
+    description: Provides details about sellers, city, and state information. This
+      dimension supports the analysis of seller performance and distribution.
+    columns:
+      - name: seller_id
+        data_type: string
+        description: seller unique identifier.
+      - name: seller_zip_code
+        data_type: int64
+        description: first 5 digits of seller zip code.
+      - name: seller_city
+        data_type: string
+        description: seller city name.
+      - name: seller_state
+        data_type: string
+        description: seller state.
+  - name: fct_sales
+    description: Captures transactional sales data, including quantities sold, revenue
+    columns:
+      - name: order_id
+        data_type: string
+        description: unique identifier of an order.
+      - name: product_id
+        data_type: string
+        description: unique product identifier.
+      - name: seller_id
+        data_type: string
+        description: seller unique identifier.
+      - name: price
+        data_type: float64
+        description: item price
+      - name: freight_value
+        data_type: float64
+        description: item freight value item (if an order has more than one item the freight value is splitted between items).
+      - name: shipping_limit_date
+        data_type: timestamp
+        description: Shows the seller shipping limit date for handling the order over to the logistic partner.
+      - name: no_of_items
+        data_type: int64
+        description: no of items in an order
+      - name: total_price
+        data_type: float64
+        description: no_of_items * price
+      - name: total_freight_value
+        data_type: float64
+        description: no_of_items * freight_value
+      - name: total_order_value
+        data_type: float64
+        description: total_price + total_freight_value
+  - name: fct_orders_by_state
+    description: Aggregates order data at the state level, providing insights into
+      regional sales performance and trends.
+    columns:
+      - name: order_id
+        data_type: string
+        description: unique identifier of an order.
+      - name: seller_id
+        data_type: string
+        description: seller unique identifier.
+      - name: customer_id
+        data_type: string
+        description: unique identifier of a customer.
+      - name: customer_zip_code
+        data_type: int64
+        description: first five digits of customer zip code.
+      - name: seller_zip_code
+        data_type: int64
+        description: first 5 digits of seller zip code.
+      - name: order_count
+        data_type: int64
+        description: value of 1 for an order.
+  - name: fct_delivery_time
+    description: Tracks the time taken for orders to be delivered, allowing for
+      analysis of delivery efficiency and customer satisfaction.
+    columns:
+      - name: order_id
+        data_type: string
+        description: unique identifier of an order.
+      - name: product_id
+        data_type: string
+        description: unique product identifier.
+      - name: seller_id
+        data_type: string
+        description: seller unique identifier.
+      - name: days_diff
+        data_type: int64
+        description: Difference between purchase date and delivery date in days.
+      - name: hours_diff
+        data_type: int64
+        description: Difference between purchase date and delivery date in hours.
+  - name: fct_sales_by_category
+    description: Summarizes sales data by product category, enabling analysis of
+      performance across different categories and identification of
+      high-performing product lines.
+    columns:
+      - name: product_category
+        data_type: string
+        description: category name in English.
+      - name: total_sales
+        data_type: float64
+        description: Aggregated price of all sales(sum).
