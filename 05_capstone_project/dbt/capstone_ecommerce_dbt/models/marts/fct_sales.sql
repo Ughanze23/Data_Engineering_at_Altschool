@@ -33,9 +33,9 @@ WITH sales AS (
         price,
         freight_value,
         shipping_limit_date,
-        total_price,
-        total_freight_value,
-        (total_price + total_freight_value) AS total_order_value
+        ROUND(total_price,2) as total_price,
+        ROUND(total_freight_value,2),
+        ROUND((total_price + total_freight_value),2) AS total_order_value
         FROM total_sales
     )
 
