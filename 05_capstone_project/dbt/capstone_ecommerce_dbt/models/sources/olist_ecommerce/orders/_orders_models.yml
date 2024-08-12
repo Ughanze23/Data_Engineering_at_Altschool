@@ -23,7 +23,49 @@ models:
        
   - name: stg_order_items
     description: maps 1-1 with source order items table 
+    columns:
+      - name: order_id
+        description: order unique identifier.
+      - name: order_item_id
+        description: sequential number identifying number of items included in the same order.
+      - name: product_id
+        description: product unique identifier.
+      - name: seller_id
+        description: seller unique identifier.
+      - name: shipping_limit_date
+        description: Shows the seller shipping limit date for handling the order over to the logistic partner.
+      - name: price
+        description: item price.
+      - name: freight_value
+        description: item freight value item (if an order has more than one item the freight value is splitted between items).
+
   - name: stg_order_payments
     description:  maps 1-1 with source orders payments table 
+    columns:
+      - name: order_id
+        description: unique identifier of an order.
+      - name: payment_sequential
+        description: a customer may pay an order with more than one payment method. If he does so, a sequence will be created to accommodate all.
+      - name: payment_type
+        description: method of payment chosen by the customer.
+      - name: payment_installments
+        description: number of installments chosen by the customer.
+      - name: payment_value
+        description: transaction value. 
   - name: stg_order_reviews
     description: maps 1-1 with source order reviews table 
+    columns:
+      - name: order_id
+        description: unique order identifier.
+      - name: review_creation_date
+        description: Shows the date in which the satisfaction survey was sent to the customer.
+      - name: review_comment_title
+        description: Comment title from the review left by the customer, in Portuguese.
+      - name: review_score
+        description: Note ranging from 1 to 5 given by the customer on a satisfaction survey.
+      - name: review_id
+        description: unique review identifier.
+      - name: review_comment_message
+        description: Comment message from the review left by the customer, in Portuguese.
+      - name: review_answer_timestamp
+        description: Shows satisfaction survey answer timestamp.
