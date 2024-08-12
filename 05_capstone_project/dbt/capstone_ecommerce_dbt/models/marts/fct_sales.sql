@@ -20,12 +20,13 @@ WITH sales AS (
         price,
         freight_value,
         shipping_limit_date,
+        no_of_items,
         (no_of_items * price) as total_price,
         (freight_value * price) as total_freight_value
         FROM sales
     )
         ,
-    total_order_value as (
+    ttl_order_value as (
         SELECT 
         order_id,
         product_id, 
@@ -33,10 +34,24 @@ WITH sales AS (
         price,
         freight_value,
         shipping_limit_date,
-        ROUND(total_price,2) as total_price,
-        ROUND(total_freight_value,2),
-        ROUND((total_price + total_freight_value),2) AS total_order_value
+        no_of_items,
+        total_price,
+        total_freight_value,
+        (total_price + total_freight_value) AS total_order_value
         FROM total_sales
+    ),
+    rounded_values as (
+         SELECT 
+        order_id,
+        product_id, 
+        seller_id, 
+        price,
+        freight_value,
+        shipping_limit_date,
+        no_of_items,
+        ROUND(total_price,2) as total_price,
+        ROUND(total_freight_value,2) as total_freight_value,
+        ROUND(total_order_value,2) as total_order_value
+    FROM ttl_order_value
     )
-
-    SELECT * FROM total_order_value
+    SELECT * FROM rounded_values
