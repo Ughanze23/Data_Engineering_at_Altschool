@@ -24,7 +24,7 @@ sales_by_category AS (
     SELECT 
         product_id,
         product_category, 
-        (price * no_of_items) AS total_sales
+        (price * no_of_items) AS total_price
     FROM 
         sales
 )
