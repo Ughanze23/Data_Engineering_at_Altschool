@@ -9,12 +9,12 @@ This project involves developing an end to end ETL(ELT) process using the olist 
 ![alt text](data-architecture.png)
 
 ## Table of Contents
-#### Data Ingestion into PostgreSQL
-#### Create GCS bucket and Bigquery Tables
-#### Setting up Airflow
-#### Loading data from postgresql to bigquery
-#### Transforming and Modeling Data with dbt
-#### Answering Analytical Questions
+#### [Data Ingestion into PostgreSQL](#data-ingestion-into-postgresql)
+#### [Create GCS bucket and Bigquery Tables](#create-gcs-bucket-and-bigquery-tables)
+#### [Setting up Airflow](#setting-up-airflow)
+#### [Loading data from postgresql to bigquery](#loading-data-from-postgresql-to-biqquery)
+#### [Transforming and Modeling Data with dbt](#transforming-and-modeling-data-with-dbt)
+#### [Answering Analytical Questions](#answering-analytical-questions)
 
 # Data Ingestion into PostgreSQL
 ### ERD of Ecommerce database
@@ -33,12 +33,12 @@ This project involves developing an end to end ETL(ELT) process using the olist 
 
 # Setting up Airflow
 #### Features
-* airflow folder : docker compose file used to setup airflow.
+* airflow folder : docker compose file used to setup airflow. updated the docker compose file used to setup postgres, with the necessary services.
 
-# Loading-data-from-postgresql-to-bigquery
+# Loading data from postgresql to bigquery
 ![alt text](pipeline.png)
 #### Features
-* dags folder : contains a python script. this is pipeline that moves data from ecommerce db postgres tables to biquery tables
+* dags folder : contains a python script. this is a pipeline that moves data from ecommerce postgres tables to bigquery tables
 
 # Transforming and Modeling Data with dbt
 ### Dimensional Model overview
