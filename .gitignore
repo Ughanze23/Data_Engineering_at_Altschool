@@ -4,9 +4,9 @@ pg_data2
 .env
 __pycache__
 gc
-
+dbt-env
 gcs.py
-
+postgres-db-volume
 pg_data_0
 pg_data_1
 pg_data_2

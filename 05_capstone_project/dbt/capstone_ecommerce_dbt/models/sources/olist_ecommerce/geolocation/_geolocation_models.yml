@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: stg_geolocation
+    description: maps 1-1 with source geolocation table 
+    columns:
+      - name: zip_code
+        description: first 5 digits of zip code.
+      - name: lat
+        description: latitude.
+      - name: lng
+        description: longitude.
+      - name: city
+        description: city name.
+      - name: state
+        description: state code.
+  

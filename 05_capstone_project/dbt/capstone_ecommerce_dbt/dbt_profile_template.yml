@@ -1,0 +1,14 @@
+'dbt project name':
+  outputs:
+    dev:
+      dataset: DATA_SET_NAME
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      keyfile: SERVICE_ACCOUNT_FILE
+      location: US
+      method: service-account
+      priority: interactive
+      project: PROJECT_ID
+      threads: 4
+      type: bigquery
+  target: dev

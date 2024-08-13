@@ -5,9 +5,9 @@
       "mode": "REQUIRED"
     },
     {
-      "name": "product_category_name",
+      "name": "category_id",
       "type": "STRING",
-      "mode": "NULLABLE"
+      "mode": "REQUIRED"
     },
     {
       "name": "product_name_lenght",

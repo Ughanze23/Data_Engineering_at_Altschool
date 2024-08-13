@@ -81,7 +81,7 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
     - ${AIRFLOW_PROJ_DIR:-.}/gc/alt-school.json:/opt/airflow/gc/alt-school.json
-  user: "${AIRFLOW_UID:-1000}:0"
+  user: "${AIRFLOW_UID:-501}:0"
   depends_on:
     &airflow-common-depends-on
     #redis:
@@ -297,7 +297,7 @@ services:
     ports:
       - "5434:5432"
     volumes:
-      - ../pg_data_19:/var/lib/postgresql/data
+      - ../pg_data:/var/lib/postgresql/data
       - ../data:/data
       - ../infra_setup/init.sql:/docker-entrypoint-initdb.d/init.sql
 volumes:

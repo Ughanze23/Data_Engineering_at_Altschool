@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: stg_products
+    description : maps 1-1 with source products table 
+    columns:
+      - name: product_id
+        description: unique product identifier.
+      - name: category_id
+        description: unique product category identifier.
+      - name: product_name_length
+        description: number of characters extracted from the product name.
+      - name: product_description_length
+        description: number of characters extracted from the product description.
+      - name: product_photos_qty
+        description: number of product published photos.
+      - name: product_weight_g
+        description: product weight measured in grams.
+      - name: product_length_cm
+        description: product length measured in centimeters.
+      - name: product_height_cm
+        description: product height measured in centimeters.
+      - name: product_width_cm
+        description: product width measured in centimeters.
+      
+
+  - name: stg_product_category
+    description : maps 1-1 with source products category table 
+    columns:
+      - name: category_id
+        description: unique product category identifier.
+      - name: product_category_name
+        description: category name in Portuguese.
+      - name: product_category
+        description: category name in English.

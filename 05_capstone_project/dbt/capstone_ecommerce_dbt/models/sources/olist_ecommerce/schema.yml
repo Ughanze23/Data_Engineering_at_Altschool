@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name : staging
+    database: alt-school-423017
+    schema : raw_ecommerce
+    description : Data loaded into our data warehouse from source systems
+    
+    tables:
+      - name : customers
+        description : Table has information about the customer and their location.
+      - name : geolocation
+        description : Table has information on Brazilian zip codes and its lat/lng coordinates.
+      - name : sellers
+        description : Table contains data about the sellers that fulfilled orders made at Olist.
+      - name : products
+        description : Table contains data about the products sold by Olist.
+      - name : product_category
+        description : Table contains product category name sold by Olist.
+      - name : orders
+        description : Table contains information about orders made at Olist stores.
+      - name : order_items
+        description : Table contains data about the items purchased within each order.
+      - name : order_payments
+        description : Table contains data about the orders payment options.
+      - name : order_reviews
+        description : Table contains data about the reviews made by the customers.
