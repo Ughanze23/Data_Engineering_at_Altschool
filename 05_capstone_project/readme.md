@@ -9,12 +9,12 @@ This project involves developing an end to end ETL(ELT) process using the olist 
 ![alt text](data-architecture.png)
 
 ## Table of Contents
-#### [Data Ingestion into PostgreSQL](#data-ingestion-into-postgresql)
-#### [Create GCS bucket and BigQuery Tables](#create-gcs-bucket-and-bigquery-tables)
-#### [Setting up Airflow](#setting-up-airflow)
-#### [Loading Data from PostgreSQL to BigQuery](#loading-data-from-postgresql-to-bigquery)
-#### [Transforming and Modeling Data with dbt](#transforming-and-modeling-data-with-dbt)
-#### [Answering Analytical Questions](#answering-analytical-questions)
+- [Data Ingestion into PostgreSQL](#data-ingestion-into-postgresql)
+- [Create GCS bucket and BigQuery Tables](#create-gcs-bucket-and-bigquery-tables)
+- [Setting up Airflow](#setting-up-airflow)
+- [Loading Data from PostgreSQL to BigQuery](#loading-data-from-postgresql-to-bigquery)
+- [Transforming and Modeling Data with dbt](#transforming-and-modeling-data-with-dbt)
+- [Answering Analytical Questions](#answering-analytical-questions)
 
 # Data Ingestion into PostgreSQL
 ### ERD of Ecommerce database
