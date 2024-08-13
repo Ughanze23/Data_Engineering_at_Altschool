@@ -10,9 +10,9 @@ This project involves developing an end to end ETL(ELT) process using the olist 
 
 ## Table of Contents
 #### [Data Ingestion into PostgreSQL](#data-ingestion-into-postgresql)
-#### [Create GCS bucket and Bigquery Tables](#create-gcs-bucket-and-bigquery-tables)
+#### [Create GCS bucket and BigQuery Tables](#create-gcs-bucket-and-bigquery-tables)
 #### [Setting up Airflow](#setting-up-airflow)
-#### [Loading data from postgresql to bigquery](#loading-data-from-postgresql-to-biqquery)
+#### [Loading Data from PostgreSQL to BigQuery](#loading-data-from-postgresql-to-bigquery)
 #### [Transforming and Modeling Data with dbt](#transforming-and-modeling-data-with-dbt)
 #### [Answering Analytical Questions](#answering-analytical-questions)
 
@@ -26,16 +26,16 @@ This project involves developing an end to end ETL(ELT) process using the olist 
 * docker-compose file : creates a postgres database called 'ecommerce' and ingest data into it using the init.sql script and csv data found in data folder.
 
 
-# Create GCS bucket and Bigquery Tables
+# Create GCS bucket and BigQuery Tables
 #### Features
 * src folder : contains python scripts to create gcs bucket , datasets and bigquery tables.
 * schemas folder: contains json files, the schemas of the tables to data will be loading into from postgres.
 
 # Setting up Airflow
 #### Features
-* airflow folder : docker compose file used to setup airflow. updated the docker compose file used to setup postgres, with the necessary services.
+* airflow folder : contains a docker compose file used to setup airflow. updated the docker compose file used to setup postgres, with the necessary services.
 
-# Loading data from postgresql to bigquery
+# Loading Data from PostgreSQL to BigQuery
 ![alt text](pipeline.png)
 #### Features
 * dags folder : contains a python script. this is a pipeline that moves data from ecommerce postgres tables to bigquery tables
