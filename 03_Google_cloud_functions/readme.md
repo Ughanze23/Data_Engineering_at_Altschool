@@ -7,11 +7,22 @@
 I designed a simple process that simulates , a source system generating data > writing it to a GCS bucket >> the bucket then triggers a cloud function >> that writes the data to a bigquery table
 
 ## Table of Contents
+- [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Features](#features)
 - [Reference](#reference)
 
+## Features
+* requirements.txt
+# data_generator folder: contains script that generates data and writes to a gcs bucket
+* gcs_manager.py : Google Cloud storage manager python class
+* config.py : contains constants used in main.py 
+# gcp_function folder: contains script used by the gcp function
+* bq_manager.py: bigquery resource manager python class
+* main.py : Simple data pipeline
+* .env.example file
+
+## Installation
 1. **Clone the repository:**
     
 
@@ -34,6 +45,7 @@ I designed a simple process that simulates , a source system generating data > w
 
 7.  **Create a Dataset in biquery:**
     replace the table name in gcs functions main.py with your desired dataset and table name
+
 ## Usage
 
 1. **Run the Query:**
@@ -45,14 +57,6 @@ I designed a simple process that simulates , a source system generating data > w
     check the biquery table to see the data written to it.
     ```
 
-## Features
-* requirements.txt
-# data_generator folder: contains script that generates data and writes to a gcs bucket
-* gcs_manager.py : Google Cloud storage manager python class
-* config.py : contains constants used in main.py 
-# gcp_function folder: contains script used by the gcp function
-* bq_manager.py: bigquery resource manager python class
-* main.py : Simple data pipeline
-*.env.example file
+
 
 
