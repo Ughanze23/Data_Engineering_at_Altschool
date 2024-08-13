@@ -17,7 +17,7 @@ This project involves developing an end to end ETL(ELT) process using the olist 
 - [Answering Analytical Questions](#answering-analytical-questions)
 
 # Data Ingestion into PostgreSQL
-### ERD of Ecommerce database
+### ERD of ecommerce database
 ![alt text](infra_setup/ERD.png)
 
 #### Features
@@ -41,7 +41,7 @@ This project involves developing an end to end ETL(ELT) process using the olist 
 * dags folder : contains a python script. this is a pipeline that moves data from ecommerce postgres tables to bigquery tables
 
 # Transforming and Modeling Data with dbt
-### Dimensional Model overview
+### Dimensional model overview
 ![alt text](dimensionalmodel.png)
 ##### Features
 * dbt folder : contains the dbt project. contains models to transform(clean data,rename columns, create metrics) and model the data in bigquery.
