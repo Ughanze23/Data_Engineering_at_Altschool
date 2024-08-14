@@ -14,10 +14,10 @@ I designed a simple process that simulates , a source system generating data > w
 
 ## Features
 * requirements.txt
-# data_generator folder: contains script that generates data and writes to a gcs bucket
+#### data_generator folder: contains script that generates data and writes to a gcs bucket
 * gcs_manager.py : Google Cloud storage manager python class
 * config.py : contains constants used in main.py 
-# gcp_function folder: contains script used by the gcp function
+#### gcp_function folder: contains script used by the gcp function
 * bq_manager.py: bigquery resource manager python class
 * main.py : Simple data pipeline
 * .env.example file
