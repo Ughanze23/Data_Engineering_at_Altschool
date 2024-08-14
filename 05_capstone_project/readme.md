@@ -1,4 +1,4 @@
-# Captstone Project : Data Engineering Lifecycle 
+# Capstone Project : Data Engineering Lifecycle 
 
 
 ## Description
