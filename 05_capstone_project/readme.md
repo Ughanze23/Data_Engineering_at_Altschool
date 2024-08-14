@@ -1,9 +1,9 @@
-# Captstone Project : Data Engineering Lifecycle <a href ="https://www.loom.com/share/3a42f1d9da604a808a512cacf992f0ae?sid=3a22bcf2-74bf-4c1c-b7f4-428a2c4616a5">quick overview of the project</a>
+# Captstone Project : Data Engineering Lifecycle 
 
 
 ## Description
 This project involves developing an end to end ETL(ELT) process using the olist ecommerce  dataset from Kaggle to help data end users answer some analytical questions. In this project i show a working knowledge of tools like, Postgresql, Docker/Docker Compose, Airflow, dbt and Bigquery.
-
+<a href ="https://www.loom.com/share/3a42f1d9da604a808a512cacf992f0ae?sid=3a22bcf2-74bf-4c1c-b7f4-428a2c4616a5">a short video on the project.</a>
 
 ## Data Architecture
 ![alt text](data-architecture.png)
