@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS orders.orders(
 
 -- create order items table
 CREATE TABLE IF NOT EXISTS orders.order_items(
-    order_id VARCHAR(255) NOT NULL ,
+    order_id VARCHAR(255) NOT NULL PRIMARY KEY ,
     order_item_id INTEGER NOT NULL,
     product_id VARCHAR(255) NOT NULL,
     seller_id VARCHAR(255) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS orders.order_items(
 
 --create order reviews table
 CREATE TABLE IF NOT EXISTS orders.order_reviews(
-    review_id VARCHAR(255) NOT NULL ,
+    review_id VARCHAR(255) NOT NULL  PRIMARY KEY,
     order_id VARCHAR(255) NOT NULL,
     review_score INTEGER NOT NULL,
     review_comment_title TEXT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS orders.order_reviews(
 );
 
 CREATE TABLE IF NOT EXISTS staging.products(
- product_id VARCHAR(255) NOT NULL PRIMARY KEY,
+ product_id VARCHAR(255) NOT NULL ,
     product_category_name VARCHAR(255) NULL,
     product_name_lenght INTEGER NULL,
     product_description_lenght INTEGER NULL,
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS staging.products(
 
 --create order payments table
 CREATE TABLE IF NOT EXISTS orders.order_payments(
-    order_id VARCHAR(255) NOT NULL,
+    order_id VARCHAR(255) NOT NULL PRIMARY KEY,
     payment_sequential INTEGER NOT NULL,
     payment_type VARCHAR(255) NOT NULL,
     payment_installments INTEGER NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS orders.order_payments(
 
 --create customers table
 CREATE TABLE IF NOT EXISTS customers.customers(
-    customer_id VARCHAR(255) NOT NULL,
+    customer_id VARCHAR(255) NOT NULL PRIMARY KEY,
     customer_unique_id VARCHAR(255) NOT NULL,
     customer_zip_code_prefix BIGINT NOT NULL,
     customer_city VARCHAR(255) NOT NULL,
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS products.products(
 
 -- create products category table
 CREATE TABLE IF NOT EXISTS products.product_category(
-    category_id UUID NOT NULL DEFAULT gen_random_uuid(),
+    category_id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
     product_category_name VARCHAR(255) NOT NULL,
     product_category_name_english VARCHAR(255) NOT NULL
 );
