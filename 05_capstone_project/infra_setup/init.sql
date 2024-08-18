@@ -125,6 +125,15 @@ COPY customers.customers (customer_id,
     customer_state)
 FROM '/data/olist_customers_dataset.csv' DELIMITER ',' CSV HEADER;
 
+COPY orders.orders (order_id,
+    customer_id,
+    order_status,
+    order_purchase_timestamp,
+    order_approved_at,
+    order_delivered_carrier_date,
+    order_delivered_customer_date,order_estimated_delivery_date)
+FROM '/data/olist_orders_dataset.csv' DELIMITER ',' CSV HEADER;
+
 COPY geo_location.geolocation (geolocation_zip_code_prefix,
     geolocation_lat,
     geolocation_lng,
@@ -132,14 +141,9 @@ COPY geo_location.geolocation (geolocation_zip_code_prefix,
     geolocation_state)
 FROM '/data/olist_geolocation_dataset.csv' DELIMITER ',' CSV HEADER;
 
-COPY orders.order_items (order_id,
-    order_item_id,
-    product_id,
-    seller_id,
-    shipping_limit_date,
-    price,
-    freight_value)
-FROM '/data/olist_order_items_dataset.csv' DELIMITER ',' CSV HEADER;
+COPY sellers.sellers (seller_id, seller_zip_code_prefix, seller_city,seller_state)
+FROM '/data/olist_sellers_dataset.csv' DELIMITER ',' CSV HEADER;
+
 
 COPY orders.order_payments (order_id,
     payment_sequential,
@@ -158,16 +162,6 @@ COPY orders.order_reviews (review_id,
 FROM '/data/olist_order_reviews_dataset.csv' DELIMITER ',' CSV HEADER ENCODING 'UTF8';
 
 
-
-COPY orders.orders (order_id,
-    customer_id,
-    order_status,
-    order_purchase_timestamp,
-    order_approved_at,
-    order_delivered_carrier_date,
-    order_delivered_customer_date,order_estimated_delivery_date)
-FROM '/data/olist_orders_dataset.csv' DELIMITER ',' CSV HEADER;
-
 COPY staging.products (product_id, product_category_name,product_name_lenght,
     product_description_lenght,
     product_photos_qty,
@@ -177,8 +171,7 @@ COPY staging.products (product_id, product_category_name,product_name_lenght,
     product_width_cm)
 FROM '/data/olist_products_dataset.csv' DELIMITER ',' CSV HEADER;
 
-COPY sellers.sellers (seller_id, seller_zip_code_prefix, seller_city,seller_state)
-FROM '/data/olist_sellers_dataset.csv' DELIMITER ',' CSV HEADER;
+
 
 
 COPY products.product_category (product_category_name,product_category_name_english)
@@ -203,3 +196,13 @@ FROM staging.products stp
 LEFT JOIN products.product_category cat ON cat.product_category_name = stp.product_category_name;
 
 DROP TABLE staging.products;
+
+
+COPY orders.order_items (order_id,
+    order_item_id,
+    product_id,
+    seller_id,
+    shipping_limit_date,
+    price,
+    freight_value)
+FROM '/data/olist_order_items_dataset.csv' DELIMITER ',' CSV HEADER;
