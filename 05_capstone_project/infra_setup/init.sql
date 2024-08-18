@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS orders.orders(
     order_delivered_carrier_date TIMESTAMP(0) WITHOUT TIME ZONE NULL,
     order_delivered_customer_date TIMESTAMP(0) WITHOUT TIME ZONE NULL,
     order_estimated_delivery_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
-    UNIQUE (customer_id)
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 );
 
 -- create order items table
@@ -27,7 +27,9 @@ CREATE TABLE IF NOT EXISTS orders.order_items(
     seller_id VARCHAR(255) NOT NULL,
     shipping_limit_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     price FLOAT(53) NOT NULL,
-    freight_value FLOAT(53) NOT NULL
+    freight_value FLOAT(53) NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES products(product_id),
+    FOREIGN KEY (seller_id) REFERENCES sellers(seller_id)
 );
 
 --create order reviews table
@@ -38,7 +40,8 @@ CREATE TABLE IF NOT EXISTS orders.order_reviews(
     review_comment_title TEXT NULL,
     review_comment_message TEXT NULL,
     review_creation_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
-    review_answer_timestamp TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL
+    review_answer_timestamp TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id)
 );
 
 CREATE TABLE IF NOT EXISTS staging.products(
@@ -83,7 +86,8 @@ CREATE TABLE IF NOT EXISTS products.products(
     product_weight_g FLOAT(53) NULL,
     product_length_cm FLOAT(53) NULL,
     product_height_cm FLOAT(53) NULL,
-    product_width_cm FLOAT(53) NULL
+    product_width_cm FLOAT(53) NULL,
+    FOREIGN KEY (category_id) REFERENCES product_category(category_id)
 );
 
 -- create products category table
