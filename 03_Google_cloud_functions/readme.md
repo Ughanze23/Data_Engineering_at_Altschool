@@ -1,6 +1,6 @@
 ![alt text](image.png)
 
-# Manage Google cloud function : (GCS) to Bigquery table
+# Google cloud function data pipeline  : Move data from (GCS) to Bigquery table.
 
 
 ## Description
